@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="familyApp">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+	<script type="text/javascript" src="./resources/js/lib/angular/angular.js"></script>
+	<script type="text/javascript" src="./resources/js/lib/angular/angular-ui-router.js"></script>
+	<script type="text/javascript" src="./resources/js/familyApp.js"></script>
+	<script type="text/javascript" src="./resources/js/controller/joinfamilyController.js"></script>
+	<script type="text/javascript" src="./resources/js/service/joinFamilyService.js"></script>
+	<script type="text/javascript" src="./resources/js/controller/headerController.js"></script>
+	<script type="text/javascript" src="./resources/js/service/headerService.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+This is for testing
+	<div ng-controller="joinFamilyController" >
+		<img id="profile_pic" data-ng-src="data:image/png;base64,{{getImage}}" data-err-src="/images/girlprofile.png" width="100%" height="70%">
+	</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="familyApp">
+<head>
+<meta charset="ISO-8859-1">
+<title>Waiting Family</title>
+
+<link href="../resources/css/bootstrap-theme.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/bootstrap-theme.min.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/bootstrap.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/bootstrap.min.css" type="text/css"
+	rel="stylesheet">
+
+<link href="../resources/css/headerwithbutton.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/join_family.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/success_signup.css" type="text/css"
+	rel="stylesheet">
+	
+<!-- <script type="text/javascript" src="../resources/js/common_functions.js"></script>
+ -->
+
+  <!-- <script src="../resources/js/angular.min.js"></script> -->
+  <script type="text/javascript" src="../resources/js/lib/angular/angular.js"></script>
+	<script type="text/javascript" src="../resources/js/lib/angular/angular-ui-router.js"></script>
+	<script type="text/javascript" src="../resources/js/familyApp.js"></script>
+	
+	<script type="text/javascript" src="../resources/js/controller/headerController.js"></script>
+	<script type="text/javascript" src="../resources/js/service/headerService.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row" id="pageHeader" ng-controller="headerController">
+			<div class="col-xs-3 col-sm-3  col-md-3  col-lg-3 col-lg-offset-1"
+				id="logo" ng-click="home()"></div>
+			
+		</div>
+
+		<div class="row" id="pagefooterwithsuccess_signupBox"  >
+			<div class="col-xs-8 col-xs-offset-2  col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3" id="waitfamilyInfo">
+				<div class="waitfamilyInfo_center">
+					<div class="centerfortext">
+						<div class="centertitle">
+							<font>SUCCESSFUL SIGN UP!</font>
+						</div>
+						<div class="centerphotowithname">
+							<div class="centerphoto">
+								<img class="img-circle" id="waitprofilephoto"  >
+								
+							</div>
+							<div class="centername">
+								Thanks for signing up.Confirm your email address to activate your account.
+							</div>
+					
+						</div>
+						<div class="centercancelbutton">
+							<a href="/FamilyApp_WebUI/views/login.html" class="canelwaiting" id="canelwaiting"><font>Back to home</font></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html ng-app="familyApp">
+<head>
+<meta charset="ISO-8859-1">
+<title>Request</title>
+
+<link href="../resources/css/bootstrap-theme.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/bootstrap-theme.min.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/bootstrap.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/bootstrap.min.css" type="text/css"
+	rel="stylesheet">
+
+<link href="../resources/css/headerwithbutton.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/join_family.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/request_noti.css" type="text/css"
+	rel="stylesheet">
+<script type="text/javascript" src="../resources/js/common_functions.js"></script>
+<script type="text/javascript" src="../resources/js/lib/angular/angular.js"></script>
+<script type="text/javascript" src="../resources/js/lib/angular/angular-ui-router.js"></script>
+<script type="text/javascript" src="../resources/js/familyApp.js"></script>
+<script type="text/javascript" src="../resources/js/controller/familyProfileController.js"></script>
+<script type="text/javascript" src="../resources/js/service/familyProfileService.js"></script>
+<script type="text/javascript" src="../resources/js/controller/headerController.js"></script>
+<script type="text/javascript" src="../resources/js/service/headerService.js"></script>
+   
+</head>
+<body ng-controller="requestedMemberController">
+	<div class="container-fluid">
+		<div class="row" id="pageHeader" ng-controller="headerController">
+			<div class="col-xs-2 col-sm-2  col-md-2  col-lg-2 col-lg-offset-1"
+				id="logo"></div>
+			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" id="header_buttons">
+				<button class="header_btn" id="header_logout" ng-click="logout()">
+					<img alt="" src="../resources/icons/logout_icon.png" width="35px;"
+						style="transform: scaleX(-1);"> LOGOUT
+				</button>
+				<button class="header_btn" ng-click="chat()">
+					<img alt="" src="../resources/icons/groupchat_icon.png" width="45px;"
+						height="30px"> GROUP CHAT
+				</button>
+				<button class="header_btn" ng-click="calendar()">
+					<img alt="" src="../resources/icons/dashboard_calendar_icon.png"
+						width="35px;"> CALENDAR AND SCHEDULE
+				</button>
+				<button class="header_btn" ng-click="notification()">
+					<img alt="" src="../resources/icons/noti_icon.png" width="40px;">
+					NOTIFICATION
+				</button>
+				<button class="header_btn" id="header_discuss"
+					ng-click="discussion()">
+					<img alt="" src="../resources/icons/discussion_icon.png" width="45px;">
+					DISCUSSION
+				</button>
+				<button class="header_btn" ng-click="checklistpage()">
+					<img alt="" src="../resources/icons/checklist_icon.png" width="45px;">
+					CHECK LIST
+				</button>
+				<button class="header_btn header_btnfp" ng-click="familyProfile()">
+					<img alt="" src="../resources/icons/family_profile_icon.png" width="40px;">
+					FAMILY PROFILE
+				</button>
+			</div>
+			<div class="col-xs-1 col-sm-1  col-md-1  col-lg-1"
+				style="margin: 0; padding: 0;">
+				<div class="profile_pic_name">
+					<button class="profile_button" id="header_profile"
+						ng-click="profile()">
+						<img id="profile_pic" alt="" ng-src="data:image/jpeg;base64,{{profileImageUrl}}"
+							width="100%" height="70%">
+						<div id="profile_name"
+							style="font-size: 12px; font-family: ChalkboardSE; color: #000000; padding-top: 3px;">PROFILE</div>
+					</button>
+				</div>
+				<div class="arrowhead_border"></div>
+			</div>
+			<div class="titlelogo" ><div class="titlelogotext" style=" width: 180px; height:25px; text-align: center; margin-left: 10px; top: 20px;position: relative;font-size: 20px; font-family: ChalkboardSE; color: #000000; z-index: 3">FAMILY PROFILE</div></div>
+		</div>
+
+		<div class="row" id="pagefooterwithrequest_familyBox" >
+			<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 no-float" style="padding: 0" id="tabMenu" >
+				
+					<button type="button" id="familyprofiletabmenu" class="menubtn" style="margin-right: 5px;" onclick="fpFunction()" >FAMILY PROFILE</button>
+				
+			
+					<button type="button" id="familymembertabmenu" class="menubtn" style="margin-right: 5px;" onclick="fmFunction()" >FAMILY MEMBER</button>
+				
+					<button type="button" id="leavetabmenu" class="menubtn" style="margin-right: 5px;" onclick="leaveFunction()">LEAVE FAMILY</button>
+				
+					<button type="button" id="requesttabmenu" class="menubtnrequestfamily"  >REQUEST</button>
+					
+			</div>
+			<div class="col-xs-12  col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1" id="requestfamilyInfo">
+				<div class="requestfamilyInfo_center">
+					<div class="requestNotiPanel">
+						<div class="requestNotiInfo" ng-repeat="member in members">
+							<div class="requestNotiInfoCenter">
+								<div class="requestpersonphoto" style="float: left">
+									<img class="img-circle" id="requestpersonphoto_image" style="background-image: url(../resources/icons/user_profile_icon_4.png);">
+								</div>
+						
+								<div class="requestwithtime" style="float: left">
+									<div class="requesttext">
+										{{member.username}} HAS REQUESTED TO JOIN YOUR FAMILY.
+									</div>
+									<div class="requesttime">
+										{{member.requestDate}}
+									</div>
+								</div>
+								
+								<div class="Cancel" style="float: left;">
+								
+									<button type="button" class="cancelrequest" id="{{member.cancelid}}" ng-click="cancelRequest(member.cancelid)" style="margin-left: 15px;"></button>
+									<button type="button" class="acceptrequest" id="{{member.acceptid}}" ng-click="acceptRequest(member.acceptid)"></button>
+								</div>
+								
+							</div>					
+						</div>
+						<span style="text-align: center; font-family: ChalkboardSE; font-size: 14px; width: 100%;">{{message}}</span>
+	
+				
+						
+						
+					</div>
+					<div class="viewmore">
+						<div class="textcenter"><a style="color: #000000;" ng-click="view_all_request()">VIEW ALL REQUESTS</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

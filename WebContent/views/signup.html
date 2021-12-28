@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>SignUp</title>
+		
+		<link href="../resources/css/bootstrap-theme.css" type="text/css" rel="stylesheet">
+		<link href="../resources/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet">
+		<link href="../resources/css/bootstrap.css" type="text/css" rel="stylesheet">
+		<link href="../resources/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+		<link href="../resources/css/headerwithbutton.css" type="text/css" rel="stylesheet">
+		<link href="../resources/css/signup.css" type="text/css" rel="stylesheet">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="/resources/demos/style.css">
+		
+		<script type="text/javascript" src="../resources/js/common_functions.js"></script>
+		<script type="text/javascript" src="../resources/js/lib/angular/angular.js"></script>
+		<script type="text/javascript" src="../resources/js/lib/angular/angular-ui-router.js"></script>
+		<script type="text/javascript" src="../resources/js/familyApp.js"></script>
+		<script type="text/javascript" src="../resources/js/controller/signupController.js"></script>
+		<script type="text/javascript" src="../resources/js/service/signupService.js"></script>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+		<script>
+		  $(function() {
+			    $( "#datepicker" ).datepicker({
+			      showOn: "button",
+			      changeMonth: true,
+			      changeYear: true,
+			      buttonImage: "../resources/icons/calendar_icon.png",
+			      dateFormat: "mm/dd/yy",
+			      buttonImageOnly: true,
+			      buttonText: "Select date",
+			      yearRange: "-100:+10",
+			      beforeShow: function(){    
+			           $(".ui-datepicker").css('font-size', 17.3) 
+			    }
+			    });
+			   $(".ui-datepicker-trigger").css({"height" : "25px", "width" : "25px", "float" : "right", "margin" : "10px"});
+			  } );
+		  
+		</script>
+	</head>
+<body>
+	<div class="container-fluid">
+		<div class="row" id="pageHeaderSignUp">
+			<div class="col-xs-2 col-xs-offset-5 col-sm-2 col-sm-offset-5 col-md-2 col-md-offset-5 col-lg-2 col-lg-offset-5"
+				id="logo"></div>
+		</div>
+		
+		<div class="row" id="pagefooterwithsignUpBox" ng-app="familyApp">
+			<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1" id="white-box-signUp" ng-controller="registerController as user">
+				<div class="row" id="title_barSignup">
+					<div class="title_bar_center"><div class="title_text">SIGN UP</div></div>
+				</div>
+				<div class="profileInfo" >
+					<div class="profileInfo_center" >
+						<form name="myForm" action="/">
+							<div class="username">
+								<div class="user_icon" style="float: left;"></div>
+								<div class="user_name" style="float: left;"><font>USERNAME</font></div>
+							</div>
+							<div class="placeholder"><input ng-model="user.uname"  type="text"  placeholder="USERNAME" id="username"></div>
+							
+							<div  id="checkusername"></div>
+						
+							<div class="useremail">
+								<div class="useremail_icon" style="float: left;"></div>
+								<div class="useremail_name" style="float: left;"><font>EMAIL</font></div>
+							</div>
+							<div class="placeholder"><input ng-model="user.uemail" ng-blur="(user.uemail!='' && user.uemail != undefined ? useremail(user.uemail): user.duplicate_email = '')" type="email" placeholder="EXAMPLE@GMAIL.COM" id="email" name="email" required>
+								<div id="checkemail"></div>
+								<div class="error" style="color: red;" id="wwcheckemail">{{duplicate_email}}</div>
+							 	<span style="color: red; " class="error" ng-show=" myForm.email.$error.email">Not valid email!</span>
+							</div>
+							
+							<div class="userpassword">
+								<div class="userpassword_icon" style="float: left;"></div>
+								<div class="userpassword_name" style="float: left;"><font>PASSWORD</font></div>
+							</div>
+							<div class="placeholder"><input type="password" ng-model="user.upassword" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" name="password" id="password"></div>
+							
+							<div class="passwordNull" id="checkpassword"></div>
+					
+							<div class="retypepassword">
+								<div class="retypepassword_icon" style="float: left;"></div>
+								<div class="retypepassword_name" style="float: left;"><font>REENTER PASSWORD</font></div>
+							</div>
+							<div class="placeholder"><input type="password" ng-model="user.retypepassword" id="retypepassword" name="retypepassword" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" name="confirmpassword" ></div>
+						
+							<div class="passwordMatch" id="checkpasswordMatch"></div>
+							
+						
+							<div class="gendermf">
+								<div class="male" style="float: left;">
+									<input type="radio" ng-model="user.gender" value="M" checked>
+      								<span> MALE </span>
+      							</div>
+								<div class="female" style="float: left;">
+									<input type="radio" ng-model="user.gender" value="F" >
+      								<span> FEMALE </span>
+								</div>
+							</div>
+							
+						
+							<div class="birthday">
+								<div class="birthday_icon" style="float: left;"></div>
+								<div class="birthday_date" style="float: left;"><font>BIRTHDAY</font></div>
+							</div>
+							<div class="date_container">
+								<!-- <div class="placeholder"> --><!-- <input class="start_date" type="date" ng-model="user.selected_date" id="selected_date"   > --><!-- </div> -->
+								<input id="datepicker" class="inputs" placeholder="CHOOSE YOUR BIRTHDAY" ng-model="user.selected_date" >
+								<!-- <button class="open-button" type="button" ></button> -->
+							</div>
+							
+						
+							<div class="phone">
+								<div class="phoneno_icon" style="float: left;"></div>
+								<div class="phoneno" style="float: left;"><font>PHONE NUMBER</font></div>
+							</div>
+							<div class="placeholder"><input type="text" ng-model="user.phonenum" name="phonenum" placeholder="123456789" id="phone"></div>
+							<div  id="checkphone"></div>
+							<br/>
+							<textarea hidden="" id="base64image" ng-model="user.profilephoto" class="base64image" style=" width: 300px;height: 100px; overflow: auto; background-color: blue;" wrap="soft" ></textarea>
+							<textarea hidden="" id="base64coverimage" ng-model="user.profilecoverphoto" class="base64coverimage" style=" width: 300px;height: 100px; overflow: auto; background-color: blue;" wrap="soft" ></textarea>
+							<br/>
+							<!-- <div class="signUpbtn">
+								<a href="" class="signUp">SING UP</a>
+							</div> -->
+							<div class="signupcanceldiv">
+								
+								
+								<button type="button" class="signupcancel" ng-click="signupcancel()" style="float: left;margin-right: 10px;left: 0">CANCEL</button>
+								<button type="button" class="btn btn-arrow-right" ng-click="signup()" style="float:left; " id="signup">SIGN UP</button>
+							</div>
+						</form>
+						
+					</div>
+				</div>
+				<div class="profilephoto">
+					<div class="profilephoto_center">
+						<div class="profilephoto_title">ADD PROFILE PHOTO</div>
+						<br/>
+						
+						<img  ng-model="user.profilephoto" class="img-circle" id="profilephoto" ><br/><br/>
+						<canvas class="img-circle" id="canvas" width="100px" height="100px" style="display: none"></canvas>
+					
+						
+						<input  type="file" onchange="encodeImageFileAsURL(this)" id="fileLoaderprofilephoto" name="files"  title="Load File" style="display: none" />
+						
+						<a id="upload_imagelink"  class="upload_imagelink" onclick="Openprofilephoto()">CLICK TO UPLOAD AN IMAGE FROM YOUR LIBRARY</a><br/><br/><br/>
+						
+						<video id="video" autoplay="autoplay" width="50px" height="70px" style="display: none"></video>
+						<!-- <button id="snap">Take photo</button> -->
+						
+					
+						<button type="button" class="take_photobtn" id="take_photo">
+							<div class="take_photo_icon" style="float: left"></div>
+							<div class="take_photo_text" style="float: right;"><font>TAKE PHOTO</font></div>
+						</button>
+						<br/><br/>
+						<!-- <a href="" id="skip" class="skiplink">skip this step</a> -->
+					</div>
+				</div>
+				<div class="coverphoto">
+					<div class="coverphoto_center">
+						<div class="profilephoto_title">ADD COVER PHOTO</div>
+						
+						<img class="coverphoto_image" id="coverphoto_image"><br/><br/>
+						<canvas class="img-circle" id="canvas_cover" width="100px" height="100px" style="display: none"></canvas>
+						
+						<input type="file"  onchange="encodeCoverImageFileAsURL(this)" id="fileLoadercoverphoto" name="files"  title="Load File" style="display: none" />
+						
+						<a id="upload_imagelink" class="upload_imagelink" onclick="Opencoverphoto()">CLICK TO UPLOAD AN IMAGE FROM YOUR LIBRARY</a><br/><br/>
+						<video id="video_cover" autoplay="autoplay" width="50px" height="70px" style="display: none"></video>
+						
+						
+						
+						<button type="button" class="take_photobtn" id="take_photocover">
+							<div class="take_photo_icon" style="float: left"></div>
+							<div class="take_photo_text" style="float: right;"><font>TAKE PHOTO</font></div>
+						</button>
+						<br/><br/>
+						<!-- <a href="" id="skip" class="skiplink">skip this step</a> -->
+					</div>
+				</div>
+				<!-- <input type="file" onchange="encodeImageFileAsURL(this)" /> -->
+				
+				
+				
+			</div>
+		</div>
+	</div>
+	
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+	<script>
+	 function Openprofilephoto(){
+			document.getElementById('fileLoaderprofilephoto').click(function () {
+				$('document').ready(function () {
+				    $("#fileLoaderprofilephoto").change(function () {
+				        if (this.files && this.files[0]) {
+				            var reader = new FileReader();
+				            reader.onload = function (e) {
+				                $('#profilephoto').attr('src', e.target.result);
+				            }
+				            reader.readAsDataURL(this.files[0]);
+				        }
+				    });
+				    });
+	        });
+		} 
+
+		$('document').ready(function () {
+			
+		    $("#fileLoaderprofilephoto").change(function () {
+		        if (this.files && this.files[0]) {
+		            var reader = new FileReader();
+		            reader.onload = function (e) {
+		                $('#profilephoto').attr('src', e.target.result);
+		            }
+		            reader.readAsDataURL(this.files[0]);
+		        }
+		    });
+		    }); 
+
+
+		function Opencoverphoto(){
+			document.getElementById('fileLoadercoverphoto').click(function () {
+				$('document').ready(function () {
+				    $("#fileLoadercoverphoto").change(function () {
+				        if (this.files && this.files[0]) {
+				            var reader = new FileReader();
+				            reader.onload = function (e) {
+				                $('#coverphoto_image').attr('src', e.target.result);
+				            }
+				            reader.readAsDataURL(this.files[0]);
+				        }
+				    });
+				    });
+	        });
+		} 
+
+		$('document').ready(function () {
+			
+		    $("#fileLoadercoverphoto").change(function () {
+		        if (this.files && this.files[0]) {
+		            var reader = new FileReader();
+		            reader.onload = function (e) {
+		                $('#coverphoto_image').attr('src', e.target.result);
+		            }
+		            reader.readAsDataURL(this.files[0]);
+		        }
+		    });
+		    }); 
+			
+		var video= document.getElementById('video');
+		if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
+			{	
+				navigator.mediaDevices.getUserMedia({ video: true, audio:true}).then(function(stream){
+					video.src=window.URL.createObjectURL(stream);
+					});
+			}
+		var canvas=document.getElementById('canvas');
+		var context=canvas.getContext('2d');
+
+		document.getElementById('take_photo').addEventListener('click',function(){
+			context.drawImage(video,0,0,100,100);
+			profilephoto.src = canvas.toDataURL();
+			});
+
+
+
+		var video_cover= document.getElementById('video_cover');
+		if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
+			{	
+				navigator.mediaDevices.getUserMedia({ video: true, audio:true}).then(function(stream){
+					video.src=window.URL.createObjectURL(stream);
+					});
+			}
+		var canvas_cover=document.getElementById('canvas_cover');
+		var context_cover=canvas_cover.getContext('2d');
+
+		document.getElementById('take_photocover').addEventListener('click',function(){
+			context_cover.drawImage(video,0,0,100,100);
+			coverphoto_image.src = canvas_cover.toDataURL();
+			});
+
+
+
+
+		function encodeImageFileAsURL(element) {
+			  var file = element.files[0];
+			  var reader = new FileReader();
+			  reader.onloadend = function() {
+			    var result= reader.result;
+			     $(".base64image").text(result); 
+			    
+			    /*  $('#profilephoto').attr("src",result);  */
+
+			   /*  var name = $('.uname');
+			    name.val('hellopss');
+			    name.trigger('name'); 
+			    name.trigger('change'); */
+			  /*   $("#uname").val("hellopss"); */
+			   /*  console.log(result); */
+			  }
+			 reader.readAsDataURL(file);
+			}
+
+		function encodeCoverImageFileAsURL(element) {
+			  var file = element.files[0];
+			  var reader = new FileReader();
+			  reader.onloadend = function() {
+			    var result= reader.result;
+			     $(".base64coverimage").text(result); 
+			    
+			    /*  $('#profilephoto').attr("src",result);  */
+
+			   /*  var name = $('.uname');
+			    name.val('hellopss');
+			    name.trigger('name'); 
+			    name.trigger('change'); */
+			  /*   $("#uname").val("hellopss"); */
+			   /*  console.log(result); */
+			  }
+			 reader.readAsDataURL(file);
+			}
+
+
+
+
+		//validate
+		$(document).ready(function(){
+			$('#retypepassword').keyup(checkpasswordMatch);
+			});
+
+		function checkpasswordMatch(){
+				var password= $("#password").val();
+				var retypepassword= $("#retypepassword").val();
+
+				if(password != retypepassword)
+					{
+						/* $("#checkpasswordMatch").css('color': 'red','font-family': 'ChalkboardSE','font-size': '16px','margin-left': '60px'); */
+						$("#checkpasswordMatch").css('color', 'red','font-family', 'ChalkboardSE');
+						$("#checkpasswordMatch").css('font-family', 'ChalkboardSE');
+						$("#checkpasswordMatch").css('font-size', '14px');
+						
+						$("#checkpasswordMatch").text("Retype password does not match password");
+	
+					}
+				else if(password == '' && retypepassword != '' ){
+					$("#checkpasswordMatch").css('color', 'red','font-family', 'ChalkboardSE');
+					$("#checkpasswordMatch").css('font-family', 'ChalkboardSE');
+					$("#checkpasswordMatch").css('font-size', '14px');
+					
+					$("#checkpasswordMatch").text("You should write password first");
+				}
+				else{
+					$("#checkpasswordMatch").css('color', 'red','font-family', 'ChalkboardSE');
+					$("#checkpasswordMatch").css('font-family', 'ChalkboardSE');
+					$("#checkpasswordMatch").css('font-size', '14px');
+					
+					$("#checkpasswordMatch").text("");
+				}
+			}
+
+
+
+
+		$(document).ready(function(){
+			$('#password').keyup(checkpasswordCount);
+			});
+
+		function checkpasswordCount(){
+				var password= $("#password").val();
+				
+
+				if(password.length < 8)
+				{
+					$("#checkpassword").css('color', 'red','font-family', 'ChalkboardSE');
+					$("#checkpassword").css('font-family', 'ChalkboardSE');
+					$("#checkpassword").css('font-size', '14px');
+					
+					$("#checkpassword").text("Password must be at least 8");
+
+				}
+				else{
+					$("#checkpassword").css('color', 'red','font-family', 'ChalkboardSE');
+					$("#checkpassword").css('font-family', 'ChalkboardSE');
+					$("#checkpassword").css('font-size', '14px');
+				
+					$("#checkpassword").text("");
+				}
+			}
+
+
+		
+
+
+		$(document).ready(function(){
+			$('#signup').click(checkpassword);
+			});
+
+		function checkpassword(){
+			var password= $("#password").val();
+			var username= $("#username").val();
+			var email = $("#email").val();
+			var retypepassword = $("#retypepassword").val();
+			var phone = $("#phone").val();
+
+			if(password == ''){
+				$("#checkpassword").css('color', 'red','font-family', 'ChalkboardSE');
+				$("#checkpassword").css('font-family', 'ChalkboardSE');
+				$("#checkpassword").css('font-size', '14px');
+				
+				$("#checkpassword").text("Password shouldn't be null");
+			}
+
+			
+
+			if(username == ''){
+				$("#checkusername").css('color', 'red','font-family', 'ChalkboardSE');
+				$("#checkusername").css('font-family', 'ChalkboardSE');
+				$("#checkusername").css('font-size', '14px');
+				
+				$("#checkusername").text("Username shouldn't be null");
+			}
+
+		
+			if(email == ''){
+				$("#checkemail").css('color', 'red','font-family', 'ChalkboardSE');
+				$("#checkemail").css('font-family', 'ChalkboardSE');
+				$("#checkemail").css('font-size', '14px');
+				
+				$("#checkemail").text("Email shouldn't be null");
+			}
+
+			if(retypepassword == ''){
+				$("#checkpasswordMatch").css('color', 'red','font-family', 'ChalkboardSE');
+				$("#checkpasswordMatch").css('font-family', 'ChalkboardSE');
+				$("#checkpasswordMatch").css('font-size', '14px');
+				
+				$("#checkpasswordMatch").text("Retypepassword shouldn't be null");
+			}
+
+			if(phone == ''){
+				$("#checkphone").css('color', 'red','font-family', 'ChalkboardSE');
+				$("#checkphone").css('font-family', 'ChalkboardSE');
+				$("#checkphone").css('font-size', '14px');
+				
+				$("#checkphone").text("Phone number shouldn't be null");
+			}
+		}
+
+		//for username count
+		$(document).ready(function(){
+			$('#username').keyup(checkusernameCount);
+			});
+
+		function checkusernameCount(){
+				var username= $("#username").val();
+				
+
+				if(username.length >= 1)
+				{
+					$("#checkusername").css('color', 'red','font-family', 'ChalkboardSE');
+					$("#checkusername").css('font-family', 'ChalkboardSE');
+					$("#checkusername").css('font-size', '14px');
+					
+					$("#checkusername").text("");
+
+				}
+				
+			}
+
+
+		//for email count
+		$(document).ready(function(){
+			$('#email').keyup(checkemailCount);
+			});
+
+		function checkemailCount(){
+				var email= $("#email").val();
+				
+
+				if(email.length >= 1)
+				{
+					$("#checkemail").css('color', 'red','font-family', 'ChalkboardSE');
+					$("#checkemail").css('font-family', 'ChalkboardSE');
+					$("#checkemail").css('font-size', '14px');
+					
+					$("#checkemail").text("");
+
+				}
+				
+			}
+
+		//for phone count
+		$(document).ready(function(){
+			$('#phone').keyup(checkphoneCount);
+			});
+
+		function checkphoneCount(){
+				var phone= $("#phone").val();
+				
+
+				if(phone.length >= 1)
+				{
+					$("#checkphone").css('color', 'red','font-family', 'ChalkboardSE');
+					$("#checkphone").css('font-family', 'ChalkboardSE');
+					$("#checkphone").css('font-size', '14px');
+					
+					$("#checkphone").text("");
+
+				}
+				
+			}
+
+
+		//change Date
+		  /* function changeDate(){
+			  var date = new Date($('#selected_date').val());
+			  day = date.getDate();
+		      month = date.getMonth() + 1;
+		      year = date.getFullYear();
+		      alert([day, month, year].join('/'));
+
+		      var selectdate = [day, month, year].join('/');
+		     alert(selectdate);  
+			    return selectdate;
+			     
+		}   */
+		
+		 
+
+
+		
+
+	</script>
+
+</body>
+</html>

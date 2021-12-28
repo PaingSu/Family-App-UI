@@ -1,0 +1,58 @@
+@CHARSET "ISO-8859-1";
+
+.confirmation{
+	min-height: 250px;
+	width: 280px;
+	border: 6px solid #59c6ad;
+	background-color: white;
+	text-align: center;
+	padding: 25px 60px 20px;
+}
+
+.confirm_image{
+	margin-top: -20px;
+}
+
+.btns{
+	width: 100px;
+	height: 30px;
+	background-color: #beeae0;
+	border-color: transparent;
+	margin-top: 30px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.error_image{
+	margin-bottom: 20px;
+}
+
+
+
+.checklist_dialog{
+	height: 250px;
+	width: 350px;
+	border: 5px solid white;
+	background-color: #beeae0;
+	padding: 30px;
+}
+
+.checklist_dialog input[type=text]{
+	width: 97%;
+	height: 35px;
+	border: 1px solid grey;
+	border-radius: 3px;
+	background-color: white;
+	box-shadow: -2px 2px 10px 0px gray;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-bottom: 5px;
+}
+
+
+.checklist_dialog .btns{
+	background-color: #59c6ad;
+	float: right;
+	margin-right: 0px;
+	margin-left: 10px;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="familyApp">
+<head>
+<meta charset="ISO-8859-1">
+<title>Login</title>
+
+<link href="../resources/css/bootstrap-theme.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/bootstrap-theme.min.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/bootstrap.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/bootstrap.min.css" type="text/css"
+	rel="stylesheet">
+
+<link href="../resources/css/login.css" type="text/css" rel="stylesheet">
+
+<script type="text/javascript" src="../resources/js/lib/angular/angular.js"></script>
+<script type="text/javascript" src="../resources/js/lib/angular/angular-ui-router.js"></script>
+<script type="text/javascript" src="../resources/js/familyApp.js"></script>
+<script type="text/javascript" src="../resources/js/controller/loginController.js"></script>
+<script type="text/javascript" src="../resources/js/service/loginService.js"></script>
+</head>
+<body ng-controller="loginController">
+
+	<div class="login">
+		<div class="logo"></div>
+
+		<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+		<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"
+			style=" top: 30%;">
+			<div
+				class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3  col-md-6 col-md-offset-3  col-lg-4 col-lg-offset-4"
+				id="white-box">
+				<div class="white-box-center">
+					<form name="loginForm" action="/">
+						<font>EMAIL</font><br />
+						<div class="placeholder">
+							<input type="text" ng-model="email" name="email" class="email"
+								placeholder="EXAMPLE@GMAIL.COM" required>
+								<span style="color: red;" ng-show="submitted && loginForm.email.$error.required">{{required_email}}</span>
+						</div>
+						<br /> <font>PASSWORD</font><br />
+						<div class="placeholder">
+							<input type="password" ng-model="password" name="password" class="password"
+								placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required>
+								<span style="color: red;" ng-show="submitted && loginForm.password.$error.required">{{enter_password}}</span>
+						</div>
+						
+						<div class="forgot">
+							<a href="/FamilyApp_WebUI/views/forget_password.html" id="forgot_password" class="forgot">FORGOT
+								PASSWORD?</a>
+						</div>
+						<span style="color: red; font-style: ChalkboardSE-Bold;" ng-show="loginForm.password.$valid && loginForm.email.$valid">{{message}}</span>
+						<!-- <font><input type="submit" value="Login" style="color: #000000"></font><div class="triangle"></div> -->
+
+						<button type="button" class="btn btn-arrow-right" ng-click="login()">LOGIN</button>
+						<br />
+						
+						<br />
+
+						<div class="center-block" id="center">
+							<button type="button" class="facebook" ng-click="facebookLogin()"></button>
+							<button type="button" class="google" ng-click="googleLogin()"></button>
+							
+						</div>
+						<br />
+						<div class="create">
+							<a class="create" href="/FamilyApp_WebUI/views/signup.html" id="create_new">CREATE NEW ACCOUNT</a>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	
+
+</body>
+</html>

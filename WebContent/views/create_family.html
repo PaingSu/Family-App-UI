@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html ng-app="familyApp">
+<head>
+<meta charset="ISO-8859-1">
+<title>Create Family</title>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<link href="../resources/css/bootstrap-theme.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/bootstrap-theme.min.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/bootstrap.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/bootstrap.min.css" type="text/css"
+	rel="stylesheet">
+
+<link href="../resources/css/headerwithbutton.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/join_family.css" type="text/css"
+	rel="stylesheet">
+<link href="../resources/css/create_family.css" type="text/css"
+	rel="stylesheet">	
+<!-- 
+<script type="text/javascript" src="../resources/js/common_functions.js"></script> -->
+
+<link href="../resources/css/login.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="../resources/js/lib/angular/angular.js"></script>
+<script type="text/javascript" src="../resources/js/lib/angular/angular-ui-router.js"></script>
+<script type="text/javascript" src="../resources/js/familyApp.js"></script>
+<script type="text/javascript" src="../resources/js/controller/createfamilyController.js"></script>
+<script type="text/javascript" src="../resources/js/service/createfamilyService.js"></script>
+<script type="text/javascript" src="../resources/js/controller/headerController.js"></script>
+<script type="text/javascript" src="../resources/js/service/headerService.js"></script>
+</head>
+<body>
+	<div class="container-fluid" >
+		<div class="row" id="pageHeader" ng-controller="headerController">
+			<div class="col-xs-2 col-sm-2  col-md-2  col-lg-2 col-lg-offset-1"
+				id="logo"></div>
+			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" id="header_buttons">
+				<button class="header_btn" id="header_logout" ng-click="logout()">
+					<img alt="" src="../resources/icons/logout_icon.png" width="35px;"
+						style="transform: scaleX(-1);"> LOGOUT
+				</button>
+				<button class="header_btn" ng-click="chat()">
+					<img alt="" src="../resources/icons/groupchat_icon.png" width="45px;"
+						height="30px"> GROUP CHAT
+				</button>
+				<button class="header_btn" ng-click="calendar()">
+					<img alt="" src="../resources/icons/dashboard_calendar_icon.png"
+						width="35px;"> CALENDAR AND SCHEDULE
+				</button>
+				<button class="header_btn" ng-click="notification()">
+					<img alt="" src="../resources/icons/noti_icon.png" width="40px;">
+					NOTIFICATION
+				</button>
+				<button class="header_btn" id="header_discuss"
+					ng-click="discussion()">
+					<img alt="" src="../resources/icons/discussion_icon.png" width="45px;">
+					DISCUSSION
+				</button>
+				<button class="header_btn" ng-click="checklistpage()">
+					<img alt="" src="../resources/icons/checklist_icon.png" width="45px;">
+					CHECK LIST
+				</button>
+				<button class="header_btn header_btnfp" ng-click="familyProfile()">
+					<img alt="" src="../resources/icons/family_profile_icon.png" width="40px;">
+					FAMILY PROFILE
+				</button>
+			</div>
+			<div class="col-xs-1 col-sm-1  col-md-1  col-lg-1"
+				style="margin: 0; padding: 0;">
+				<div class="profile_pic_name">
+					<button class="profile_button" id="header_profile"
+						ng-click="profile()">
+						<img id="profile_pic" alt="" ng-src="data:image/jpeg;base64,{{profileImageUrl}}"
+							width="100%" height="70%">
+						<div id="profile_name"
+							style="font-size: 12px; font-family: ChalkboardSE; color: #000000; padding-top: 3px;">PROFILE</div>
+					</button>
+				</div>
+				<div class="arrowhead_border"></div>
+			</div>
+			<div class="titlelogo" ><div class="titlelogotext" style=" width: 180px; height:25px; text-align: center; margin-left: 10px; top: 20px;position: relative;font-size: 20px; font-family: ChalkboardSE; color: #000000; z-index: 3">FAMILY PROFILE</div></div>
+		</div>
+
+		<div class="row" id="pagefooterwithCreate_familyBox"  ng-controller="createFamilyController">
+			
+			<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1" id="createfamilyInfo">
+				<div class="createfamilyInfo_center">
+					
+								<div class="familyphoto">
+							<img class="img-circle" id="familyphoto_image" ng-model="familyphoto">
+							
+							<input onchange="encodeImageFileAsURL(this)" type="file" id="fileLoaderfamilyphoto" name="files"  title="Load File" style="display: none"/>
+							
+							<button class="camera_input"  onclick="openFamilyPhotoFile()"></button>
+						</div>
+						<textarea hidden="" id="base64image" class="base64image"></textarea>
+						<!-- <font>FAMILY ID</font>
+						<div class="placeholder"><input type="text" id="createfamilyId" name="cfid" placeholder="WHITE FAMILY ID" readonly="readonly"></div> -->
+						<form name="createForm" action="/">
+						<font>FAMILY NAME</font>
+						<div class="placeholder"><input type="text" ng-model="familyName" name="cfname" placeholder="WHITE FAMILY NAME" required>
+						<span ng-show="submitted && createForm.cfname.$error.required">{{required_familyname}}</span>
+						
+						</div>
+						<font>DESCRIPTION</font>
+						<div class="placeholder"><input name="description" type="text" ng-model="description" name="description" placeholder="WHITE DESCRIPTION" required>
+						<span ng-show="submitted && createForm.description.$error.required">{{required_description}}</span>
+						</div>
+				
+						
+						<div class="date_container">
+							<font>FAMILY START DATE</font>
+							<div>
+								<div class="input_div">
+									<input name="startdate" ng-model="startdate" id="datepicker" class="inputs" placeholder="START DATE" required>
+								
+								</div>      						
+								<span ng-show="submitted && createForm.startdate.$error.required">{{required_startdate}}</span>
+							
+							</div>
+							
+    					</div>
+    				</form>	
+    				
+					<div class="titlememberList">
+						<div class="titlememberListCenter">
+							<font>INVITE FAMILY MEMBER</font>
+						</div>					
+					</div>
+					
+					<div class="memberAddPanel" id="memberAddPanel">
+						<!-- <div class="memberInfo">
+							<div class="memberInfoCenter">
+								
+								<div class="emailaddress" style="float: left">
+									<input ng-model="memberemail" type="email" placeholder="EXAMPLE1@GMAIL.COM"/>
+								</div>
+						
+								<div class="Cancel" style="float: left;">
+									<button type="button" class="cancelmember"></button>
+								</div>
+							</div>					
+						</div>
+				
+						<div class="memberInfo">
+							<div class="memberInfoCenter">
+								
+								<div class="emailaddress" style="float: left">
+									<input type="email" placeholder="EXAMPLE2@GMAIL.COM"/>
+								</div>
+						
+								<div class="Cancel" style="float: left;">
+									<button type="button" class="cancelmember"></button>
+								</div>
+							</div>					
+						</div>
+						<div class="memberInfo">
+							<div class="memberInfoCenter">
+								
+								<div class="emailaddress" style="float: left">
+									<input type="email" placeholder="EXAMPLE3@GMAIL.COM" />
+								</div>
+						
+								<div class="Cancel" style="float: left;">
+									<button type="button" class="cancelmember"></button>
+								</div>
+							</div>					
+						</div>
+	 -->
+						
+					</div>
+					<div>
+						<form name="addmember" action="/">
+							<div class="Invitemember">
+								<div class="memberInfoCenter">
+								
+									<div class="emailaddress" style="float: left">
+										<input type="email" placeholder="ADD NEW MAIL" id="txt_invitemember"/>
+									</div>
+						
+									<div class="Cancel" style="float: left;">
+										<button ng-click="add()" type="button" class="addmember" id="addmember"></button>
+									</div>
+								</div>					
+							</div>
+							<span style="color: red;" ng-show="submit && addmember.input.$error.required">{{require_email}}</span>
+    						<span style="color: red;" ng-show="submit && addmember.input.$error.email">{{invalid_email}}</span>
+						</form>
+					</div>
+					
+					<br/><br/><br/><br/>
+					<div class="savecancel">
+						
+						<button type="button" ng-click="createFamily()" style="float: right; margin-top: 1%; border: none; margin-left: 15px;"><font>CREATE</font></button>
+						<button type="button" ng-click="cancelcreateFamily()" id="canceladdmemberBtnadd" style="float: right; margin-top: 1%; border:none; "><font>CANCEL</font></button>
+					</div>
+						
+					
+				
+					
+					
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+	<script>
+		 function openFamilyPhotoFile(){
+			document.getElementById('fileLoaderfamilyphoto').click(function () {
+				$('document').ready(function () {
+				    $("#fileLoaderfamilyphoto").change(function () {
+				        if (this.files && this.files[0]) {
+				            var reader = new FileReader();
+				            reader.onload = function (e) {
+				                $('#familyphoto_image').attr('src', e.target.result);
+				            }
+				            reader.readAsDataURL(this.files[0]);
+				        }
+				    });
+				    });
+	        });
+		} 
+		$('document').ready(function () {
+		    $("#fileLoaderfamilyphoto").change(function () {
+		        if (this.files && this.files[0]) {
+		            var reader = new FileReader();
+		            reader.onload = function (e) {
+		                $('#familyphoto_image').attr('src', e.target.result);
+		            }
+		            reader.readAsDataURL(this.files[0]);
+		        }
+		    });
+		    }); 
+
+		
+		/* $(function(){
+			  var count = 0;
+			  $('#addmember').click(function(){
+				  var data= $('#txt_invitemember').val();
+				  $('<div class="memberInfo"><div class="memberInfoCenter"><div class="emailaddress" style="float: left"><input type="email" id="first'+count+'"/></div><div class="Cancel" style="float: left;"><button type="button" class="cancelmember"></button></div></div></div>').appendTo('.memberAddPanel');   
+				  $('#first'+count+'').val(data); 
+			      count++;
+			      $('#txt_invitemember').val("");
+
+			      $(".cancelmember").click(function(){
+					  $(this).closest(".memberInfo").remove();
+				  });
+			  }); */
+			  
+
+			  
+			});
+		
+
+		$(function(){
+			  $(".cancelmember").click(function(){
+				  $(this).closest(".memberInfo").remove();
+			  });
+
+			});
+
+		$(function() {
+		    $( "#datepicker" ).datepicker({
+		      showOn: "button",		      
+		      buttonImage: "../resources/icons/calendar_icon.png",
+		      buttonImageOnly: true,
+		      buttonText: "Select date",
+		      dateFormat: 'mm/dd/yy',
+		      changeMonth: true,
+		      changeYear: true,
+		      yearRange: "-100:+10",
+		      beforeShow: function(){    
+		           $(".ui-datepicker").css('font-size', 17.3) 
+		    }
+		    });
+		   $(".ui-datepicker-trigger").css({"height" : "25px", "width" : "25px", "float" : "right", "margin" : "10px"});
+		  } ); 
+
+
+		function encodeImageFileAsURL(element) {
+			  var file = element.files[0];
+			  var reader = new FileReader();
+			  reader.onloadend = function() {
+			    var result= reader.result;
+			     $(".base64image").text(result); 
+			 
+			  }
+			 reader.readAsDataURL(file);
+			}
+		
+	</script>
+	
+
+
+</body>
+</html>
